@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.getRandomPassword;
-import member.model.sendEMAIL;
 
 @Controller 
 public class checkController {
@@ -26,7 +24,7 @@ public class checkController {
 	
 	
 	
-	//===========// 占쏙옙占싱듸옙 占쌩븝옙체크================================
+	//===========// �뜝�룞�삕�뜝�떛�벝�삕 �뜝�뙥釉앹삕泥댄겕================================
 	@ResponseBody 
 	@RequestMapping("idcheck.mb")
 	public String idcheck(@RequestParam("id") String id) {
@@ -40,7 +38,7 @@ public class checkController {
 	}
 	
 	
-	//=======// 占쏙옙占싱듸옙 찾占쏙옙===================================
+	//=======// �뜝�룞�삕�뜝�떛�벝�삕 李얍뜝�룞�삕===================================
 	@ResponseBody 
 	@RequestMapping("findid.mb")
 	public String FindID(@RequestParam("name") String name,@RequestParam("hp") String hp) {
@@ -59,56 +57,56 @@ public class checkController {
 	}
 	
 	
-	//==========// 占쏙옙橘占싫� 찾占쏙옙==============================================
+	//==========// �뜝�룞�삕艅섇뜝�떕占� 李얍뜝�룞�삕==============================================
 	@ResponseBody 
 	@RequestMapping("findpw.mb")
 	public String FindPW(@RequestParam("id") String id,@RequestParam("hp") String hp) throws Exception {
 		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put("id", id);
 		map.put("hp", hp);
 		
 		int result = mdao.FindPW(map);
-		String temporaryPw = getRandomPassword.tempPassword(8);// 占쏙옙占쏙옙占싸울옙占쏙옙 占쏙옙橘占싫�
-		System.out.println("�엫�떆鍮꾨�踰덊샇 :"+temporaryPw);
-		String securePassword = encoder.encode(temporaryPw);// 占쏙옙占쏙옙占싸울옙占쌔쇽옙 占쏙옙호화 占쏙옙占쏙옙
+		String temporaryPw = getRandomPassword.tempPassword(8);// �뜝�룞�삕�뜝�룞�삕�뜝�떥�슱�삕�뜝�룞�삕 �뜝�룞�삕艅섇뜝�떕占�
+		System.out.println("占쎌뿫占쎈뻻�뜮袁⑨옙甕곕뜇�깈 :"+temporaryPw);
+		//String securePassword = encoder.encode(temporaryPw);// �뜝�룞�삕�뜝�룞�삕�뜝�떥�슱�삕�뜝�뙏�눦�삕 �뜝�룞�삕�샇�솕 �뜝�룞�삕�뜝�룞�삕
 		
 		if(result>0) {
 			
 			map.put("id", id);
-			map.put("securePassword", securePassword);
+			map.put("securePassword", temporaryPw);
 			
-			MemberBean mb = mdao.getById(id);// 占쏙옙占싱듸옙 占쌔댐옙占싹댐옙 占싱몌옙占쏙옙 占쏙옙占쏙옙占싶쇽옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+			MemberBean mb = mdao.getById(id);// �뜝�룞�삕�뜝�떛�벝�삕 �뜝�뙏�뙋�삕�뜝�떦�뙋�삕 �뜝�떛紐뚯삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢�눦�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
 			
 			int cnt = mdao.resetPW(map);
-			System.out.println("占쏙옙橘占싫� 占십깍옙화 占쏙옙占� :"+cnt);
+			System.out.println("�뜝�룞�삕艅섇뜝�떕占� �뜝�떗源띿삕�솕 �뜝�룞�삕�뜝占� :"+cnt);
 			
-			sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] 占쌈시븝옙橘占싫� 占쌩쇽옙", "[Billy A Dream] 占쌈쏙옙 占쏙옙橘占싫ｏ옙占� ' "+temporaryPw+" ' 占쌉니댐옙.");
+			//sendEMAIL.sendMail(mb.getEmail(), "[Billy A Dream] �뜝�뙂�떆釉앹삕艅섇뜝�떕占� �뜝�뙥�눦�삕", "[Billy A Dream] �뜝�뙂�룞�삕 �뜝�룞�삕艅섇뜝�떕節륁삕�뜝占� ' "+temporaryPw+" ' �뜝�뙃�땲�뙋�삕.");
 			return "yes";
 		}
 		else {
 			return "null";
 		} 
 	}
-	//==========// 회占쏙옙탈占쏙옙 占쏙옙 占쏙옙橘占싫� 확占쏙옙==============================================
+	//==========// �쉶�뜝�룞�삕�깉�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕艅섇뜝�떕占� �솗�뜝�룞�삕==============================================
 	@ResponseBody 
 	@RequestMapping("quitPw.mb")
 	public String quitPw(@RequestParam("id") String id,@RequestParam("pw") String pw,HttpSession session) throws Exception {
 		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		MemberBean mb = mdao.getById(id);
 		
-		if(encoder.matches(pw, mb.getPw())){
-			mdao.deleteMember(id);// 회占쏙옙탈占쏙옙
-			session.invalidate(); // 占쏙옙占실된곤옙 占쏙옙 占쏙옙占쏙옙
+		if(pw.equals(mb.getPw())){
+			mdao.deleteMember(id);// �쉶�뜝�룞�삕�깉�뜝�룞�삕
+			session.invalidate(); // �뜝�룞�삕�뜝�떎�맂怨ㅼ삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 			return "yes";
 		}
 		return "null";
 	}
-	//==========// 회占쏙옙탈占쏙옙 占쏙옙 占쏙옙橘占싫� 확占쏙옙==============================================
+	//==========// �쉶�뜝�룞�삕�깉�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕艅섇뜝�떕占� �솗�뜝�룞�삕==============================================
 	@ResponseBody 
 	@RequestMapping("ipHpCheck.mb")
 	public String ipHpCheck(@RequestParam("id") String id,@RequestParam("hp") String hp,HttpSession session) throws Exception {

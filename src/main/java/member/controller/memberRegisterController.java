@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import member.model.MemberBean;
 import member.model.MemberDao;
 import member.model.MemberIpBean;
 import member.model.MemberIpDao;
-import member.model.sendEMAIL;
 
 @Controller
 public class memberRegisterController {
@@ -39,14 +37,13 @@ public class memberRegisterController {
 	@RequestMapping(value = command , method = RequestMethod.POST)
 	public String register(MemberBean mb) throws Exception {
 		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String securePassword = encoder.encode(mb.getPw());// 占쏙옙占쏙옙占쏙옙 pw 占쏙옙호화
+		//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		//String securePassword = encoder.encode(mb.getPw());// 占쏙옙占쏙옙占쏙옙 pw 占쏙옙호화
 		Map<String,String>map = new HashMap<String,String>();// ip 占쏙옙臼占� 占십울옙占쏙옙 mno, ip
 		
 		
 		
 		// 회占쏙옙占쏙옙占쏙옙占쌜억옙
-		mb.setPw(securePassword);
 		mdao.InsertMember(mb); 
 		
 		

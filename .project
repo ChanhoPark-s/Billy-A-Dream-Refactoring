@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Billy-A-Dream</name>
+	<name>Billy-A-Dream-Refactoring</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -46,7 +46,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1663669043013</id>
+			<id>0</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
