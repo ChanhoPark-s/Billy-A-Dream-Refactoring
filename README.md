@@ -1,8 +1,6 @@
-# Billy-A-Dream
-(Spring, 팀프로젝트) Billy a Dream 개인간 렌탈 거래 플랫폼(장정훈, 박찬호, 강전혁, 이대곤 )
+# Billy-A-Dream-Refactoring
 
-진행기간 : 22.9.12~22.9.30(3주)
+원본의 Billy A Dream 은 Spring Version 이 3. 이라서 웹소켓 작동시 많은 오류가 발생하게 된다. 그러하여 채팅 기능 구현시 ajax 를 사용하여 작업하였다.
 
-기술 스택 : AWS EC2, AWS RDS Oracle, Java, Spring, Jsp, Tomcat, Html, Css, Javascript, jQuery
+이후 제대로 된 실시간 채팅 기능을 구현하기 위해  Spring Version 4. 으로 바꾼 뒤 웹소켓을 사용하여 채팅을 구현하였다.
 
-시연영상 : https://youtu.be/pJEr0ldINx4
